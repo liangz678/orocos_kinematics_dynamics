@@ -58,26 +58,6 @@ template <> struct hash<KDL::Wrench> {
     return hash<KDL::Vector>()(w.force) ^ hash<KDL::Vector>()(w.torque);
   }
 };
-template <> struct hash<KDL::VectorVel> {
-  size_t operator()(const KDL::VectorVel &v) const noexcept {
-    return hash<KDL::Vector>()(v.value()) ^ hash<KDL::Vector>()(v.deriv());
-  }
-};
-template <> struct hash<KDL::RotationVel> {
-  size_t operator()(const KDL::RotationVel &r) const noexcept {
-    return hash<KDL::Rotation>()(r.value()) ^ hash<KDL::Vector>()(r.deriv());
-  }
-};
-template <> struct hash<KDL::TwistVel> {
-  size_t operator()(const KDL::TwistVel &t) const noexcept {
-    return hash<KDL::Twist>()(t.value()) ^ hash<KDL::Twist>()(t.deriv());
-  }
-};
-template <> struct hash<KDL::FrameVel> {
-  size_t operator()(const KDL::FrameVel &f) const noexcept {
-    return hash<KDL::Frame>()(f.value()) ^ hash<KDL::Twist>()(f.deriv());
-  }
-};
 } // namespace std
 
 void init_frames(pybind11::module &m);
